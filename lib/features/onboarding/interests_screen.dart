@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktoc_clne_re0/constant/gaps.dart';
+import 'package:tiktoc_clne_re0/features/onboarding/tutorial_screen.dart';
 import 'package:tiktoc_clne_re0/features/onboarding/widgets/interest_button.dart';
 
 const interests = [
@@ -81,6 +82,15 @@ class _InterestsScreenState extends State<InterestsScreen> {
     super.dispose();
   }
 
+  void _onNextTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const TutorialScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,19 +153,22 @@ class _InterestsScreenState extends State<InterestsScreen> {
             left: 24,
             right: 24,
           ),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 20,
-            ),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-            ),
-            child: const Text(
-              'Next',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
+          child: GestureDetector(
+            onTap: _onNextTap,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 20,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+              child: const Text(
+                'Next',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
             ),
           ),
