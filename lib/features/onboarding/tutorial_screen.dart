@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktoc_clne_re0/constant/gaps.dart';
+
+enum Direction { right, left }
+
+enum Page { first, second }
 
 class TutorialScreen extends StatefulWidget {
   const TutorialScreen({super.key});
@@ -9,94 +14,107 @@ class TutorialScreen extends StatefulWidget {
 }
 
 class _TutorialScreenState extends State<TutorialScreen> {
+  Direction _direction = Direction.right;
+  Page _showingPage = Page.first;
+
+  void _onPanUpdate(DragUpdateDetails details) {
+    if (details.delta.dx > 0) {
+      // to the right
+      setState(() {
+        _direction = Direction.right;
+      });
+    } else {
+      // to the left
+      setState(() {
+        _direction = Direction.left;
+      });
+    }
+    // print(_direction);
+  }
+
+  void _onPanEnd(DragEndDetails details) {
+    if (_direction == Direction.left) {
+      setState(() {
+        _showingPage = Page.second;
+      });
+    } else {
+      setState(() {
+        _showingPage = Page.first;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
+    return GestureDetector(
+      onPanUpdate: _onPanUpdate,
+      onPanEnd: _onPanEnd,
       child: Scaffold(
-        body: SafeArea(
-          child: TabBarView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  children: const [
-                    Gaps.v52,
-                    Text(
-                      "Watch cool videos!",
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: SafeArea(
+            child: AnimatedCrossFade(
+              firstChild: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  SizedBox(height: 80),
+                  Text(
+                    "Watch cool videos!",
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Gaps.v16,
-                    Text(
-                      "Videos are personalized for you based on what you watch, like, and share.",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                  ),
+                  Gaps.v16,
+                  Text(
+                    "Videos are personalized for you based on what you watch, like, and share.",
+                    style: TextStyle(
+                      fontSize: 20,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  children: const [
-                    Gaps.v52,
-                    Text(
-                      "Follow the rules!",
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
+              secondChild: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  SizedBox(height: 80),
+                  Text(
+                    "Follow the rules",
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Gaps.v16,
-                    Text(
-                      "Videos are personalized for you based on what you watch, like, and share.",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                  ),
+                  Gaps.v16,
+                  Text(
+                    "Take care of one another! Please!",
+                    style: TextStyle(
+                      fontSize: 20,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  children: const [
-                    Gaps.v52,
-                    Text(
-                      "Enjoy the Ride.",
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Gaps.v16,
-                    Text(
-                      "Videos are personalized for you based on what you watch, like, and share.",
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              crossFadeState: _showingPage == Page.first
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 300),
+            ),
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 48),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                TabPageSelector(
-                  // color: Colors.white,
-                  selectedColor: Colors.black38,
-                ),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 24,
+              horizontal: 24,
+            ),
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: _showingPage == Page.first ? 0 : 1,
+              child: CupertinoButton(
+                onPressed: () {},
+                color: Theme.of(context).primaryColor,
+                child: const Text('Enter the app!'),
+              ),
             ),
           ),
         ),
