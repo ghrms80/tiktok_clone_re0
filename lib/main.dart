@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tiktoc_clne_re0/features/onboarding/interests_screen.dart';
+import 'package:tiktoc_clne_re0/features/main_navigation/main_navigation_screen.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -27,7 +27,8 @@ class TikTokApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const InterestsScreen(),
+      home: const MainNavigationScreen(),
+      // home: const InterestsScreen(),
     );
   }
 }
