@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktoc_clne_re0/constant/gaps.dart';
 
 class VideoComments extends StatefulWidget {
   const VideoComments({super.key});
@@ -14,7 +15,9 @@ class _VideoCommentsState extends State<VideoComments> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
+      height: size.height * 0.75,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
@@ -33,73 +36,106 @@ class _VideoCommentsState extends State<VideoComments> {
             ),
           ],
         ),
-        body: ListView.separated(
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 16,
-          ),
-          separatorBuilder: (context, index) {
-            return const SizedBox(height: 20);
-          },
-          itemCount: 10,
-          itemBuilder: (context, index) => Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const CircleAvatar(
-                radius: 18,
-                child: Text('니꼬'),
+        body: Stack(
+          children: [
+            ListView.separated(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 16,
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '니꼬',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500,
-                      ),
-                    ),
-                    const SizedBox(width: 3),
-                    const Text(
-                        "That's not it live seen the same thing but also in a cave,"),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 10),
-              Column(
+              separatorBuilder: (context, index) {
+                return const SizedBox(height: 20);
+              },
+              itemCount: 10,
+              itemBuilder: (context, index) => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.favorite_border,
-                    color: Colors.grey.shade500,
-                    size: 20,
+                  const CircleAvatar(
+                    radius: 18,
+                    child: Text('니꼬'),
                   ),
-                  const SizedBox(height: 2),
-                  Text(
-                    '52.2K',
-                    style: TextStyle(
-                      color: Colors.grey.shade500,
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '니꼬',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade500,
+                          ),
+                        ),
+                        const SizedBox(width: 3),
+                        const Text(
+                            "That's not it live seen the same thing but also in a cave,"),
+                      ],
                     ),
-                  )
+                  ),
+                  const SizedBox(width: 10),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.favorite_border,
+                        color: Colors.grey.shade500,
+                        size: 20,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '52.2K',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          color: Colors.white,
-          child: Row(
-            children: [
-              CircleAvatar(
-                radius: 18,
-                backgroundColor: Colors.grey.shade500,
-                foregroundColor: Colors.white,
-                child: const Text('니꼬'),
+            ),
+            Positioned(
+              bottom: 0,
+              width: size.width,
+              child: BottomAppBar(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 18,
+                        backgroundColor: Colors.grey.shade500,
+                        foregroundColor: Colors.white,
+                        child: const Text('니꼬'),
+                      ),
+                      Gaps.h10,
+                      Expanded(
+                        child: TextField(
+                          cursorColor: Theme.of(context).primaryColor,
+                          decoration: InputDecoration(
+                            hintText: "Add comment...",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors.grey.shade200,
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 12,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
