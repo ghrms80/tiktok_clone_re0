@@ -13,10 +13,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          floating: true,
+          // floating: true,
           // snap: true,
-          stretch: true,
-          pinned: true,
+          // stretch: true,
+          // pinned: true,
           backgroundColor: Colors.teal,
           collapsedHeight: 80,
           expandedHeight: 200,
@@ -34,6 +34,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             centerTitle: true,
           ),
         ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: const [
+              CircleAvatar(
+                backgroundColor: Colors.red,
+                radius: 20,
+              ),
+            ],
+          ),
+        ),
         SliverFixedExtentList(
           delegate: SliverChildBuilderDelegate(
             childCount: 25,
@@ -47,7 +57,65 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           ),
           itemExtent: 100,
         ),
+        SliverPersistentHeader(
+          delegate: CustomDelegate(),
+          pinned: true,
+          floating: true,
+        ),
+        SliverGrid(
+          delegate: SliverChildBuilderDelegate(
+            childCount: 50,
+            (context, index) => Container(
+              color: Colors.blue[100 * (index % 9)],
+              child: Align(
+                alignment: Alignment.center,
+                child: Text("Item $index"),
+              ),
+            ),
+          ),
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 100,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
+            childAspectRatio: 1,
+          ),
+        ),
       ],
     );
+  }
+}
+
+class CustomDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Colors.indigo,
+      child: const FractionallySizedBox(
+        heightFactor: 1,
+        child: Center(
+          child: Text(
+            'Title!!',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  // 최대 높이, getter이므로 double을 return
+  double get maxExtent => 150;
+
+  @override
+  // 최저 높이, getter이므로 double을 return
+  double get minExtent => 80;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }
