@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktoc_clne_re0/constant/gaps.dart';
@@ -11,24 +12,26 @@ class ChatDetailScreen extends StatefulWidget {
 
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
   final TextEditingController _textEditingController = TextEditingController();
-  bool _isWriting = false;
+  // bool _isWriting = false;
 
   void _onStartWriting() {
     setState(() {
-      _isWriting = true;
+      // _isWriting = true;
     });
   }
 
-  void _onStopWriting() {
-    FocusScope.of(context).unfocus();
-    setState(() {
-      _textEditingController.clear();
-      _isWriting = false;
-    });
-  }
+  // void _onStopWriting() {
+  //   FocusScope.of(context).unfocus();
+  //   setState(() {
+  //     _textEditingController.clear();
+  //     _isWriting = false;
+  //   });
+  // }
 
   void _onChange(String value) {
-    print('changed: $value');
+    if (kDebugMode) {
+      print('changed: $value');
+    }
   }
 
   @override

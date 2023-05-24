@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktoc_clne_re0/constant/gaps.dart';
@@ -25,11 +26,15 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       TextEditingController(text: "Initial Text");
 
   void _onSearchChanged(String value) {
-    print("Searching from $value");
+    if (kDebugMode) {
+      print("Searching from $value");
+    }
   }
 
   void _onSearchSubmitted(String value) {
-    print("Submitted $value");
+    if (kDebugMode) {
+      print("Submitted $value");
+    }
   }
 
   @override

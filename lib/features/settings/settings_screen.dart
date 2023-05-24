@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -72,12 +73,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 firstDate: DateTime(1960),
                 lastDate: DateTime(2040),
               );
-              print(date);
+              if (kDebugMode) {
+                print(date);
+              }
+              // ignore: use_build_context_synchronously
               final time = await showTimePicker(
                 context: context,
                 initialTime: TimeOfDay.now(),
               );
-              print(time);
+              if (kDebugMode) {
+                print(time);
+              }
 
               // ignore: use_build_context_synchronously
               final booking = await showDateRangePicker(
@@ -96,7 +102,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   );
                 },
               );
-              print(booking);
+              if (kDebugMode) {
+                print(booking);
+              }
             },
             title: const Text("What is your birthday?"),
             subtitle: const Text("I need to know!"),
