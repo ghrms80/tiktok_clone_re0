@@ -39,6 +39,8 @@ dependencies:
   video_player: ^2.6.1
   visibility_detector: ^0.4.0+2
   marquee: ^2.2.3
+  flutter_localizations:
+    sdk: flutter  
 
 dev_dependencies:
   flutter_test:
@@ -93,3 +95,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+

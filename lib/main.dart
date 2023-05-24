@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktoc_clne_re0/features/main_navigation/main_navigation_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -33,6 +34,8 @@ class TikTokApp extends StatelessWidget {
         ),
       ),
       home: const MainNavigationScreen(),
+      localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
+      supportedLocales: const [Locale('en'), Locale('ko')],
     );
   }
 }
