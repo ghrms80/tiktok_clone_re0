@@ -36,7 +36,7 @@ class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   late final VideoPlayerController _videoPlayerController;
 
-  bool _isPaused = false;
+  bool _isPaused = true;
   final Duration _animationDuration = const Duration(milliseconds: 200);
   late final AnimationController _animationController;
 
@@ -57,8 +57,10 @@ class _VideoPostState extends State<VideoPost>
     _videoPlayerController =
         VideoPlayerController.asset("assets/videos/video_mod.mp4");
     await _videoPlayerController.initialize();
-    // await _videoPlayerController.setVolume(0);
     await _videoPlayerController.setLooping(true);
+    // if (kIsWeb) {
+    //   await _videoPlayerController.setVolume(0);
+    // }
     _videoPlayerController.addListener(_onVideoChange);
     setState(() {});
   }
