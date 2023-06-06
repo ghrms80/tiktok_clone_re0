@@ -6,6 +6,7 @@ import 'package:tiktoc_clne_re0/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktoc_clne_re0/features/main_navigation/widgets/post_video_button.dart';
 import 'package:tiktoc_clne_re0/features/users/user_profile_screen.dart';
 import 'package:tiktoc_clne_re0/features/videos/video_timeline_screen.dart';
+import 'package:tiktoc_clne_re0/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -40,9 +41,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
+      backgroundColor:
+          _selectedIndex == 0 || isDark ? Colors.black : Colors.white,
       body: Stack(
         children: [
           Offstage(
@@ -63,10 +66,13 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: _selectedIndex == 0 ? Colors.black : Colors.white,
+      bottomNavigationBar: Container(
+        color: _selectedIndex == 0 || isDark ? Colors.black : Colors.white,
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.only(
+            top: 12,
+            bottom: 32,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

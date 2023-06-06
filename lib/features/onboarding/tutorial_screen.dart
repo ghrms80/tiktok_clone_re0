@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktoc_clne_re0/constant/gaps.dart';
 import 'package:tiktoc_clne_re0/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktoc_clne_re0/utils.dart';
 
 enum Direction { right, left }
 
@@ -65,9 +66,9 @@ class _TutorialScreenState extends State<TutorialScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: SafeArea(
             child: AnimatedCrossFade(
-              firstChild: Column(
+              firstChild: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   SizedBox(height: 80),
                   Text(
                     "Watch cool videos!",
@@ -85,9 +86,9 @@ class _TutorialScreenState extends State<TutorialScreen> {
                   ),
                 ],
               ),
-              secondChild: Column(
+              secondChild: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   SizedBox(height: 80),
                   Text(
                     "Follow the rules",
@@ -112,11 +113,14 @@ class _TutorialScreenState extends State<TutorialScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
+        bottomNavigationBar: Container(
+          color: isDarkMode(context) ? Colors.black : Colors.white,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 24,
-              horizontal: 24,
+            padding: const EdgeInsets.only(
+              top: 32,
+              bottom: 64,
+              left: 24,
+              right: 24,
             ),
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 300),

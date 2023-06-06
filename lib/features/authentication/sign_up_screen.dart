@@ -4,6 +4,7 @@ import 'package:tiktoc_clne_re0/constant/gaps.dart';
 import 'package:tiktoc_clne_re0/features/authentication/username_screen.dart';
 import 'package:tiktoc_clne_re0/features/authentication/login_screen.dart';
 import 'package:tiktoc_clne_re0/features/authentication/widgets/auth_button.dart';
+import 'package:tiktoc_clne_re0/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -59,13 +60,18 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   Gaps.v20,
-                  const Text(
-                    "Create a profile, follow other accounts, make your own videos, and more.",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black45,
+                  const Opacity(
+                    opacity: 0.6,
+                    child: Text(
+                      "Create a profile, follow other accounts, make your own videos, and more.",
+                      style: TextStyle(
+                        fontSize: 16,
+                        // color: isDarkMode(context)
+                        //     ? Colors.grey.shade300
+                        //     : Colors.black45,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                   Gaps.v40,
                   if (orientation == Orientation.portrait) ...[
@@ -105,12 +111,12 @@ class SignUpScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: BottomAppBar(
-            color: Colors.grey.shade50,
-            elevation: 2,
+          bottomNavigationBar: Container(
+            color: isDarkMode(context) ? null : Colors.grey.shade50,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 32,
+              padding: const EdgeInsets.only(
+                top: 28,
+                bottom: 56,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

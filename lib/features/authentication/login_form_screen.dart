@@ -92,7 +92,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                     ),
                   ),
                   validator: (value) {
-                    if (value != null && value.isEmpty) {
+                    // if (value != null && value.isEmpty) {
+                    if (value!.isEmpty) {
                       return "Please write your password";
                     }
                     return null;
